@@ -3,13 +3,13 @@ require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 
 // Configuração da conexão usando DATABASE_URL
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres', // Dialeto explicitamente definido
-  logging: false,      // Desativa logs de SQL no console
+  dialect: 'postgres',
+  logging: false,
   pool: {
-    max: 5,         // Número máximo de conexões no pool
-    min: 0,         // Número mínimo de conexões no pool
-    acquire: 30000, // Tempo máximo de espera para adquirir uma conexão (ms)
-    idle: 10000,    // Tempo máximo que uma conexão pode ficar ociosa (ms)
+    max: 5,       
+    min: 0,       
+    acquire: 30000,
+    idle: 10000,
   },
 });
 
