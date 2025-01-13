@@ -10,8 +10,10 @@ require('dotenv').config();
 
 const app = express();
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(express.json());
 
 app.use('/user', userRoutes);
+app.use('/wine', wineRoutes);
 
 (async () => {
   await syncDatabase();

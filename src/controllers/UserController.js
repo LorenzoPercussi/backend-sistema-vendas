@@ -4,14 +4,38 @@ const { User } = require('../models');
 require('dotenv').config();
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
-
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password: hashedPassword });
-    res.status(201).json({ message: 'User created successfully!', user });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    if(!req.body.password || !req.body.email || !req.body.name){
+      res.status(400).json({
+        hasError: true,
+        message: "All fields required",
+      });
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const createdUser = await User.create({ 
+      name: req.body.name, 
+      email: req.body.email, 
+      password: hashedPassword
+    });
+    
+    const userResponse = {
+      id: createdUser.id,
+      name: createdUser.name,
+      email: createdUser.email,
+    };
+
+    res.status(201).json({
+      hasError: false,
+      message: 'User created successfully!', 
+      data: userResponse
+    });
+
+    }catch (error){
+    res.status(400).json({ 
+      hasError:true,
+      message: "Error creating user",
+      error: error.message 
+    });
   }
 };
 
