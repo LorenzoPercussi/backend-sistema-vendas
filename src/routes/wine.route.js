@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAll, addWine, getById } = require('../controllers/WineController')
+const { getAll, addWine, getById, deleteWine } = require('../controllers/WineController')
 const router = express.Router();
 
 
@@ -30,6 +30,8 @@ router.get('/getById/:id', getById);
  *         description: Erro 
  */
 router.post('/addWine', addWine);
+
+router.delete('/deleteWine', deleteWine);
 
 
 

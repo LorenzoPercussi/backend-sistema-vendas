@@ -73,8 +73,28 @@ const addWine = async(req,res) => {
     }
 };
 
+const deleteWine = async(req,res) => {
+    try{
+        await Wine.destroy({
+            where: {
+                id: req.body.guid
+            }
+        });
+        res.status(200).json({
+            hasError: false,
+            message: 'Wine deleted successfully!'
+        });
+    }catch(error){
+        res.status(400).json({
+            hasError: true,
+            message: "Error deleting wine",
+            error: error.message})
+    }
+};
+
 module.exports = {
     getAll,
     getById,
     addWine,
+    deleteWine,
 };
