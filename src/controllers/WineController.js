@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const { Wine } = require('../models');
+const logger = require('../config/logger');
 
 const  getAll = async (res) => {
     try{
@@ -10,10 +11,10 @@ const  getAll = async (res) => {
             data: wines,
         });
     }catch(error){
-        res.status(400).json({
+        logger.error(`Error fetching wines: ${error.message}`);
+        res.status(500).json({
             hasError: true,
             message: 'An error occurred while fetching wines.',
-            error: error.message 
         });
     }
 };
@@ -23,19 +24,19 @@ const  getById = async (req,res) => {
         const wineId = req.params.id;
 
         if (!wineId) {
+            logger.error(`Error fetching wines: ${error.message}`);
             return res.status(400).json({ 
                 hasError: true,
-                message: 'ID is required.',
-                error: error.message
+                message: 'ID is required.'
             });
         }
 
         const wine = await Wine.findByPk(wineId);
         if (!wine) {
+            logger.error(`Error fetching wines: ${error.message}`);
             return res.status(404).json({
                 hasError: true,
-                message: 'Wine not found.',
-                error: error.message
+                message: 'Wine not found.'
             });
         }
 
@@ -46,10 +47,11 @@ const  getById = async (req,res) => {
         });
 
     }catch(error){
-        res.status(400).json({
+        logger.error(`Error fetching wines: ${error.message}`);
+        res.status(500).json({
             hasError: true,
             message: "Error fetching wine", 
-            error: error.message});
+        });
     }
 };
 
@@ -66,10 +68,11 @@ const addWine = async(req,res) => {
             message: 'Wine added successfully!', 
             data: wine });
     }catch(error){
-        res.status(400).json({
+        logger.error(`Error fetching wines: ${error.message}`);
+        res.status(500).json({
             hasError: true,
             message: "Error adding wine",
-            error: error.message})
+        });
     }
 };
 
@@ -85,10 +88,11 @@ const deleteWine = async(req,res) => {
             message: 'Wine deleted successfully!'
         });
     }catch(error){
-        res.status(400).json({
+        logger.error(`Error fetching wines: ${error.message}`);
+        res.status(500).json({
             hasError: true,
-            message: "Error deleting wine",
-            error: error.message})
+            message: "Error deleting wine"
+        });
     }
 };
 

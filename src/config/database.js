@@ -1,7 +1,6 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
+require('dotenv').config();
 
-// Configuração da conexão usando DATABASE_URL
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   logging: false,
@@ -13,7 +12,6 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
 });
 
-// Testa a conexão com o banco
 (async () => {
   try {
     await sequelize.authenticate();
@@ -23,10 +21,9 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   }
 })();
 
-// Sincroniza os modelos com o banco de dados
 const syncDatabase = async () => {
   try {
-    await sequelize.sync({ alter: true }); // Atualiza as tabelas existentes
+    await sequelize.sync({ alter: true });
     console.log('Database synced successfully.');
   } catch (error) {
     console.error('Error syncing database:', error);
