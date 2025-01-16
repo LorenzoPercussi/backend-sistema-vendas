@@ -1,7 +1,11 @@
 const express = require('express');
-const { getAll, addWine, getById, deleteWine } = require('../controllers/WineController')
+const {
+  getAll,
+  addWine,
+  getById,
+  deleteWine,
+} = require('../controllers/WineController');
 const router = express.Router();
-
 
 /**
  * @swagger
@@ -12,10 +16,9 @@ const router = express.Router();
  *       200:
  *         description: Sucesso
  *       400:
- *         description: Erro 
+ *         description: Erro
  */
 router.get('/getAll', getAll);
-
 
 router.get('/getById/:id', getById);
 /**
@@ -27,12 +30,10 @@ router.get('/getById/:id', getById);
  *       200:
  *         description: Sucesso
  *       400:
- *         description: Erro 
+ *         description: Erro
  */
 router.post('/addWine', addWine);
 
 router.delete('/deleteWine', deleteWine);
-
-
 
 module.exports = router;
