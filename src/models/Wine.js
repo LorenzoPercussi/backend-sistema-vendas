@@ -4,20 +4,20 @@ const { sequelize } = require('../config/database');
 const Wine = sequelize.define(
   'Wine',
   {
-    id: {
+    Id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    Name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    harvest: {
+    Harvest: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    stock: {
+    Stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

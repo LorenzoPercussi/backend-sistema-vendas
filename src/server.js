@@ -4,6 +4,7 @@ const swaggerSpec = require('./config/swaggerConfig');
 const authRoutes = require('./routes/auth.route');
 const saleRoutes = require('./routes/sale.route');
 const wineRoutes = require('./routes/wine.route');
+const clientRoutes = require('./routes/client.route');
 const userRoutes = require('./routes/user.route');
 const { syncDatabase } = require('./config/database');
 require('dotenv').config();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use('/user', userRoutes);
 app.use('/wine', wineRoutes);
+app.use('/client', clientRoutes);
 
 (async () => {
   await syncDatabase();
