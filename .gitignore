@@ -13,3 +13,6 @@ yarn-error.log
 # Diretórios do sistema
 .DS_Store
 Thumbs.db
+ 
+# Todo
+.todo
